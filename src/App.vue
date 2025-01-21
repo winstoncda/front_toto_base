@@ -1,8 +1,18 @@
-<script setup></script>
+<script setup>
+import { reactive } from "vue";
+import AddTodo from "./components/AddTodo.vue";
+
+let todos = reactive([]);
+
+function addOneTodo(newTodo) {
+  console.log(newTodo);
+  // requete http
+}
+</script>
 
 <template>
   <div class="app-container">
-    <h1>Hello World !</h1>
+    <AddTodo @add-one-todo="addOneTodo" />
   </div>
 </template>
 
