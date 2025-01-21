@@ -34,12 +34,25 @@ async function addOneTodo(newTodo) {
     console.log(error);
   }
 }
+
+async function deleteTodo(todoId) {
+  console.log(todoId);
+
+  try {
+    await fetch(`http://localhost:5000/deleteTodo/${todoId}`, {
+      method: "DELETE",
+    });
+    await getTodos();
+  } catch (error) {
+    console.log(error);
+  }
+}
 </script>
 
 <template>
   <div class="app-container">
     <AddTodo @add-one-todo="addOneTodo" />
-    <TodoList :todos="todos" />
+    <TodoList :todos="todos" @delete-todo="deleteTodo" />
   </div>
 </template>
 

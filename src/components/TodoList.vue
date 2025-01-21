@@ -4,11 +4,18 @@ import OneTodo from "./OneTodo.vue";
 defineProps({
   todos: Array,
 });
+
+const emit = defineEmits(["deleteTodo"]);
 </script>
 
 <template>
   <ul>
-    <OneTodo v-for="todo of todos" :key="todo.id" :todo="todo" />
+    <OneTodo
+      v-for="todo of todos"
+      :key="todo.id"
+      :todo="todo"
+      @delete-todo="(todoId) => emit('deleteTodo', todoId)"
+    />
   </ul>
 </template>
 
