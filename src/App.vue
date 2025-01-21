@@ -4,9 +4,22 @@ import AddTodo from "./components/AddTodo.vue";
 
 let todos = reactive([]);
 
-function addOneTodo(newTodo) {
+async function addOneTodo(newTodo) {
   console.log(newTodo);
-  // requete http
+  try {
+    await fetch("http://localhost:5000/addTodo", {
+      method: "POST",
+      body: JSON.stringify({
+        name: newTodo,
+        done: 0,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
 </script>
 
