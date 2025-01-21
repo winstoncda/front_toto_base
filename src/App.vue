@@ -47,12 +47,32 @@ async function deleteTodo(todoId) {
     console.log(error);
   }
 }
+
+async function toggleTodo(todo) {
+  // console.log(todo);
+  try {
+    await fetch("http://localhost:5000/toggleTodo", {
+      method: "PATCH",
+      body: JSON.stringify(todo),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    await getTodos();
+  } catch (error) {
+    console.log(error);
+  }
+}
 </script>
 
 <template>
   <div class="app-container">
     <AddTodo @add-one-todo="addOneTodo" />
-    <TodoList :todos="todos" @delete-todo="deleteTodo" />
+    <TodoList
+      :todos="todos"
+      @delete-todo="deleteTodo"
+      @toggle-todo="toggleTodo"
+    />
   </div>
 </template>
 

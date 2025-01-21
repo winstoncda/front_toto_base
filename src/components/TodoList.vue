@@ -5,7 +5,7 @@ defineProps({
   todos: Array,
 });
 
-const emit = defineEmits(["deleteTodo"]);
+const emit = defineEmits(["deleteTodo", "toggleTodo"]);
 </script>
 
 <template>
@@ -15,6 +15,7 @@ const emit = defineEmits(["deleteTodo"]);
       :key="todo.id"
       :todo="todo"
       @delete-todo="(todoId) => emit('deleteTodo', todoId)"
+      @toggle-todo="(todo) => emit('toggleTodo', todo)"
     />
   </ul>
 </template>
