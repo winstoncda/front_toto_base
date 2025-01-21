@@ -67,7 +67,7 @@ async function toggleTodo(todo) {
 
 <template>
   <div class="app-container">
-    <AddTodo @add-one-todo="addOneTodo" />
+    <AddTodo @add-one-todo="addOneTodo" :todos="todos" />
     <TodoList
       :todos="todos"
       @delete-todo="deleteTodo"
