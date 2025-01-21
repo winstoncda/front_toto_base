@@ -1,8 +1,20 @@
 <script setup>
-import { reactive } from "vue";
+import { onMounted, reactive } from "vue";
 import AddTodo from "./components/AddTodo.vue";
+import TodoList from "./components/TodoList.vue";
 
 let todos = reactive([]);
+
+async function getTodos() {
+  const allTodos = await fetch("http://localhost:5000");
+  const response = await allTodos.json();
+  console.log(response);
+  todos.splice(0, todos.length, ...response);
+}
+
+onMounted(() => {
+  getTodos();
+});
 
 async function addOneTodo(newTodo) {
   console.log(newTodo);
@@ -17,6 +29,7 @@ async function addOneTodo(newTodo) {
         "Content-Type": "application/json",
       },
     });
+    await getTodos();
   } catch (error) {
     console.log(error);
   }
@@ -26,6 +39,7 @@ async function addOneTodo(newTodo) {
 <template>
   <div class="app-container">
     <AddTodo @add-one-todo="addOneTodo" />
+    <TodoList :todos="todos" />
   </div>
 </template>
 
